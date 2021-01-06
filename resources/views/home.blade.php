@@ -132,6 +132,25 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-md-12">
+        <div class="card card-chart">
+            <div class="card-body">
+                <table class="table table-bordered table-hover display compact custom" cellspacing="0" width="100%" id="laravel_datatable">
+                    <thead>
+                       <tr>
+                          <!--<th>FID</th>-->
+                          <th>Provinsi</th>
+                          <th>Positif</th>
+                          <th>Sembuh</th>
+                          <th>Meninggal</th>
+                       </tr>
+                    </thead>
+                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
@@ -175,8 +194,29 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<!-- DataTables -->
+<script src="/admin-lte/datatables/jquery.dataTables.min.js"></script>
+<script src="/admin-lte/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/admin-lte/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/admin-lte/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script>
     $(document).ready( function () {
+
+    $('#laravel_datatable').DataTable({
+        processing: true,
+            serverSide: true,
+            ajax: "{{ url('https://immense-chamber-80308.herokuapp.com/coronas-list') }}",
+            order: [[ 1 , "desc" ]], 
+            columns: [
+                    //{ data: 'attributes.FID'},
+                    { data: 'attributes.Provinsi' },
+                    { data: 'attributes.Kasus_Posi' },
+                    { data: 'attributes.Kasus_Semb' },
+                    { data: 'attributes.Kasus_Meni'}
+                ],
+                "dom": '<"topcustom"fr>t<"bottomcustom"ip>'
+    });
+
         $.ajax({
         type: "GET",
         url: '/provincechart/',
