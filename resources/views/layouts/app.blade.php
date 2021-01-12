@@ -63,6 +63,12 @@
               <p>Kesimpulan</p>
             </a>
           </li>
+          <li class="{{ request()->is('admin') ? 'active' : '' }} ">
+            <a href="{{ route('admin') }}">
+              <i class="nc-icon nc-touch-id"></i>
+              <p>Admin</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

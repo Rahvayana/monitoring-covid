@@ -158,7 +158,7 @@ class CoronaController extends Controller
         $contact->url=$request->url;
         $contact->no_telp=$request->telp;
         $contact->save();
-        return redirect()->route('home');
+        return redirect()->route('contact');
     }
 
     public function update($id)
@@ -175,7 +175,7 @@ class CoronaController extends Controller
         $contact->url=$request->url;
         $contact->no_telp=$request->no_telp;
         $contact->save();
-        return redirect()->route('home');
+        return redirect()->route('contact');
     }
 
     public function saveKabupaten (Request $request,$id)
@@ -187,7 +187,7 @@ class CoronaController extends Controller
         $contact->url=$request->url;
         $contact->no_telp=$request->no_telp;
         $contact->save();
-        return redirect()->route('home');
+        return redirect()->route('contact');
     }
 
     public function delete($id)

@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
@@ -109,5 +113,31 @@ class HomeController extends Controller
             'message'=>'Sukses',
         ]);
     }
+
+    public function admin()
+    {
+        $data['admins']=User::all();
+        return view('admin.index',$data);
+    }
+
+    public function addAdmin()
+    {
+        return view('admin.add-admin');
+    }
+
+    public function storeAdmin(Request $request)
+    {
+        $request->validate( [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $user =new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->save();
+        return redirect()->route('admin');
+    } 
 
 }

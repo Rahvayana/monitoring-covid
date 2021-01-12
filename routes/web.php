@@ -33,6 +33,7 @@ Route::post('/save-contact/{id}', 'CoronaController@saveContact')->name('save-co
 Route::post('/storeContact', 'CoronaController@storeContact')->name('store-contact');
 Route::post('/deleteContact/{id}', 'CoronaController@delete')->name('delete-contact');
 
+
 Route::get('/post','HomeController@post')->name('post');
 Route::get('/addpost','HomeController@addpost')->name('add-post');
 Route::get('/viewpost/{id}','HomeController@viewpost')->name('view-post');
@@ -43,3 +44,7 @@ Route::post('/deletepost/{id}','HomeController@deletepost')->name('delete-post')
 Route::get('/kesimpulan','HomeController@kesimpulan')->name('kesimpulan');
 Route::post('/updatepost','HomeController@updateanalisa')->name('update-analisa');
 
+
+Route::get('/admin','HomeController@admin')->name('admin');
+Route::get('/addadmin','HomeController@addAdmin')->name('add-admin');
+Route::post('/storeAdmin','HomeController@storeAdmin')->name('store-admin');
