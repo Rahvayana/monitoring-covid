@@ -48,3 +48,5 @@ Route::post('/updatepost','HomeController@updateanalisa')->name('update-analisa'
 Route::get('/admin','HomeController@admin')->name('admin');
 Route::get('/addadmin','HomeController@addAdmin')->name('add-admin');
 Route::post('/storeAdmin','HomeController@storeAdmin')->name('store-admin');
+Route::get('/update-contact/{id}', 'CoronaController@update')->name('update-contact');
+

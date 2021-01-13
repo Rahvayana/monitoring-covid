@@ -164,7 +164,7 @@ class CoronaController extends Controller
     public function update($id)
     {
         $data['contact']=Contact::find($id);
-        return view('edit-contact',$data);
+        return view('contact.edit-contact',$data);
     }
     public function saveContact (Request $request,$id)
     {

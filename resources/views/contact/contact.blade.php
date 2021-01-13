@@ -7,18 +7,18 @@
           <div class="card-header">
             <h4 class="card-title"> Contact (Provinsi)</h4>
             <button style="float: right" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"><i class="nc-icon nc-simple-add"></i> Tambah </button>
-            <button class="btn btn-success" style="float: right; margin-left: 10px" id="button2"><i class="fa fa-download"></i> Export</button> &nbsp;
+            <button class="btn btn-success" style="float: right; margin-left: 10px" id="button"><i class="fa fa-download"></i> Export</button> &nbsp;
             {{-- <button class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#exampleModal">+Tambah Kontak</button> --}}
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table">
+              <table class="table" id="table2excel">
                 <thead class=" text-primary">
                     <th scope="col">#</th>
                     <th scope="col">Provinsi</th>
-                    <th scope="col">URL</th>
-                    <th scope="col">PHONE</th>
-                    <th scope="col">ACTION</th>
+                    <th scope="col">Url</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Action</th>
                 </thead>
                 <tbody>
                     @foreach ($contacts as $contact)
@@ -43,17 +43,18 @@
         <div class="card">
           <div class="card-header">
             <h4 class="card-title"> Contact (Kabupaten)</h4>
-            <button style="float: right" class="btn btn-success"><i class="nc-icon nc-simple-add"></i> Tambah </button>
+            <button style="float: right" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2"><i class="nc-icon nc-simple-add"></i> Tambah </button>
+            <button class="btn btn-success" style="float: right; margin-left: 10px" id="button2"><i class="fa fa-download"></i> Export</button> &nbsp;
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table">
+              <table class="table" id="table2excel2">
                 <thead class=" text-primary">
                     <th scope="col">#</th>
                     <th scope="col">Kabupaten</th>
-                    <th scope="col">URL</th>
-                    <th scope="col">PHONE</th>
-                    <th scope="col">ACTION</th>
+                    <th scope="col">Url</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Action</th>
                 </thead>
                 <tbody>
                     @foreach ($kabupatens as $contact)
@@ -164,4 +165,30 @@
         </div>
     </div>
   </div>
+@endsection
+
+@section('script')
+<script src="{{asset("js/jquery.table2excel.js")}}"></script>
+<script>
+  var d = new Date();
+  // document.getElementById("demo").innerHTML = ;
+  $("#button").click(function(){
+    $("#table2excel").table2excel({
+      // exclude CSS class
+      exclude: ".noExl",
+      name: "Worksheet Name",
+      filename: d.getTime(), //do not include extension
+      fileext: ".xls" // file extension
+    }); 
+  });
+  $("#button2").click(function(){
+    $("#table2excel2").table2excel({
+      // exclude CSS class
+      exclude: ".noExl",
+      name: "Worksheet Name",
+      filename: d.getTime(), //do not include extension
+      fileext: ".xls" // file extension
+    }); 
+  });
+</script>
 @endsection
