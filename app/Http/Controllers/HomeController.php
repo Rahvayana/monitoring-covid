@@ -140,4 +140,27 @@ class HomeController extends Controller
         return redirect()->route('admin');
     } 
 
+    public function saveAdmin($id)
+    {
+        $data['user']=User::find($id);
+        return view('admin.edit',$data);
+    }
+    public function updateAdmin(Request $request,$id)
+    {
+        $user=new User();
+        $user=User::find($id);
+        $user->name=$request->name;
+        $user->save();
+        return redirect()->route('admin');
+    }
+
+    public function deleteAdmin($id)
+    {
+        DB::table('users')->where('id', $id)->delete();
+        return response()->json([
+            'status'=>200,
+            'message'=>'Sukses',
+        ]);
+    }
+
 }

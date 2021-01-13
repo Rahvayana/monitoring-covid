@@ -24,7 +24,7 @@
                       <td>{{$admin->name}}</td>
                       <td>{{$admin->email}}</td>
                       <td style="display: flex">
-                        <a href="{{ route('view-post', $admin->id) }}" style="margin-right: 10px;"><i class="nc-icon nc-paper"></i></a>
+                        <a href="{{ route('save-admin', $admin->id) }}" style="margin-right: 10px;"><i class="nc-icon nc-paper"></i></a>
                         <a href="#" data-toggle="modal" data-record-id="{{ $admin->id }}" data-target="#confirm-delete"><i class="nc-icon nc-simple-remove"></i></a>
                       </td>
                     </tr>
@@ -70,7 +70,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $.post('/deletepost/' + id).then()
+            $.post('/deleteAdmin/' + id).then()
             $modalDiv.addClass('loading');
             setTimeout(function() {
                 $modalDiv.modal('hide').removeClass('loading');
