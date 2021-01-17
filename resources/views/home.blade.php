@@ -412,7 +412,7 @@
                 }
             },
             series: [{
-                name: 'Sembuh',
+                name: 'Positif',
                 data: response.data.positif
             }]
         });
@@ -454,8 +454,8 @@
                 }
             },
             series: [{
-                name: 'Sembuh',
-                data: response.data.sembuh
+                name: 'Meninggal',
+                data: response.data.meninggal
             }]
         });
         },
