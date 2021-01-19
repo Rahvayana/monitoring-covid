@@ -42,10 +42,13 @@
   @endsection
 
   @section('script')
-  <script src="{{asset("ckeditor/ckeditor.js")}}"></script>
+  <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
   <script src="{{asset("js/jquery.table2excel.js")}}"></script>
-  
-  <script>
-    CKEDITOR.replace( 'post' );
-  </script>
+
+<script>
+  CKEDITOR.replace('post', {
+            filebrowserUploadUrl: "{{route('post.image', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form'
+        });
+</script>
   @endsection

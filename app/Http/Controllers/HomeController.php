@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Image;
 
 class HomeController extends Controller
 {
@@ -69,6 +71,26 @@ class HomeController extends Controller
         $post->save();
         return redirect()->route('post');
     }
+
+    public function uploadImage(Request $request)
+{
+    //JIKA ADA DATA YANG DIKIRIMKAN
+    if ($request->hasFile('upload')) {
+        $file = $request->file('upload'); //SIMPAN SEMENTARA FILENYA KE VARIABLE
+        $namaFile=date('YmdHis').$file->getClientOriginalName();
+        $data=Storage::disk('s3')->put('/images/'.$namaFile,$file, 'public');
+        //KEMUDIAN KITA BUAT RESPONSE KE CKEDITOR
+        $ckeditor = $request->input('CKEditorFuncNum');
+        $url = "https://lizartku.s3.us-east-2.amazonaws.com/".$data;
+        $msg = 'Berhasil Upload Image'; 
+        //DENGNA MENGIRIMKAN INFORMASI URL FILE DAN MESSAGE
+        $response = "<script>window.parent.CKEDITOR.tools.callFunction($ckeditor, '$url', '$msg')</script>";
+
+        //SET HEADERNYA
+        @header('Content-type: text/html; charset=utf-8'); 
+        return $response;
+    }
+}
     
     public function viewpost($id)
     {

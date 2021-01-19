@@ -36,6 +36,7 @@ Route::post('/deleteContact/{id}', 'CoronaController@delete')->name('delete-cont
 
 Route::get('/post','HomeController@post')->name('post');
 Route::get('/addpost','HomeController@addpost')->name('add-post');
+Route::post('/images', 'HomeController@uploadImage')->name('post.image');
 Route::get('/viewpost/{id}','HomeController@viewpost')->name('view-post');
 Route::post('/updatepost/{id}','HomeController@updatepost')->name('update-post');
 Route::post('/savepost','HomeController@savepost')->name('save-post');
