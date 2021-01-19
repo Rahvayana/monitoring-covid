@@ -2,6 +2,12 @@
 @section('style')
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+<style>
+    body { margin: 0; padding: 0; }
+	#mapid { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
 @endsection
 @section('content')
 <div class="row">
@@ -166,10 +172,11 @@
                 
                     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                         maxZoom: 18,
+                        style: 'mapbox://styles/mapbox/streets-v11', // style URL
                         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
                             '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
                             'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                        id: 'mapbox/dark-v10',
+                        id: 'mapbox/streets-v11',
                     }).addTo(mymap);
                     @foreach ($location_indo['features'] as $value) {
                         L.marker(["{{$value['geometry']['y']}}","{{$value['geometry']['x']}}"]).addTo(mymap)
