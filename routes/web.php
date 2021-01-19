@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/movingAvg', 'CoronaController@movingAvg')->name('movingAvg');
 Route::get('/provincechart', 'CoronaController@provinceChart');
 Route::get('/provinceLowestChart', 'CoronaController@provinceLowestChart');
+Route::get('/highmap', 'HomeController@layerMap');
 
 Route::get('/contact','HomeController@contact')->name('contact');
 Route::get('/update-contact/{id}', 'CoronaController@update')->name('update-contact');

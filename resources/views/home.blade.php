@@ -1,12 +1,18 @@
 @extends('layouts.app')
 @section('style')
-<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-<link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet" />
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
 <style>
-    body { margin: 0; padding: 0; }
-	#mapid { position: absolute; top: 0; bottom: 0; width: 100%; }
+    #mapid {
+    height: 500px; 
+    min-width: 310px; 
+    max-width: 100%; 
+    margin: 0 auto; 
+}
+.loading {
+    margin-top: 10em;
+    text-align: center;
+    color: gray;
+}
+
 </style>
 @endsection
 @section('content')
@@ -162,32 +168,11 @@
             <div class="card-header">
                 <h4 class="card-title">
                 <i class="nc-icon nc-map-big mr-1"></i>
-                Peta Sebaran Kasus Per Provinsi
+                Peta Kasus Sembuh Tiap Provinsi
                 </h4>
             </div><!-- /.card-header -->
             <div class="card-body">
                 <div id="mapid" style="width: 100%; height: 400px;"></div>
-                <script>
-                    var mymap = L.map('mapid').setView([-0.4690016,117.1550653,17], 5);
-                
-                    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-                        maxZoom: 18,
-                        style: 'mapbox://styles/mapbox/streets-v11', // style URL
-                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-                            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                        id: 'mapbox/streets-v11',
-                    }).addTo(mymap);
-                    @foreach ($location_indo['features'] as $value) {
-                        L.marker(["{{$value['geometry']['y']}}","{{$value['geometry']['x']}}"]).addTo(mymap)
-                        .bindPopup("<b>Provinsi : " + "{{$value['attributes']['Provinsi']}}" + "</b><br>" +
-                        "Positif : " + "{{$value['attributes']['Kasus_Posi']}}" + "<br>" +
-                        "Sembuh : " + "{{$value['attributes']['Kasus_Semb']}}" + "<br>" +
-                        "Meninggal : " + "{{$value['attributes']['Kasus_Meni']}}" + "<br>"
-                        );
-                    }
-                    @endforeach
-                </script>
             </div><!-- /.card-body -->
         </div>
     </div>
@@ -201,6 +186,11 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+<script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/id/id-all.js"></script>
 <!-- DataTables -->
 <script src="/admin-lte/datatables/jquery.dataTables.min.js"></script>
 <script src="/admin-lte/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -208,6 +198,63 @@
 <script src="/admin-lte/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script>
     $(document).ready( function () {
+        Highcharts.getJSON('http://monitoring-covid-19.herokuapp.com/highmap', function (data) {
+            // Make codes uppercase to match the map data
+            // Instantiate the map
+            Highcharts.mapChart('mapid', {
+
+                chart: {
+                    map: 'countries/id/id-all',
+                    borderWidth: 1
+                },
+
+                title: {
+                    text: 'Kasus Sembuh Per Provinsi '
+                },
+
+                legend: {
+                    layout: 'horizontal',
+                    borderWidth: 0,
+                    backgroundColor: 'rgba(255,255,255,0.85)',
+                    floating: true,
+                    verticalAlign: 'top',
+                    y: 25
+                },
+
+                mapNavigation: {
+                    enabled: true
+                },
+
+                colorAxis: {
+                    min: 1,
+                    type: 'logarithmic',
+                    minColor: '#EEEEFF',
+                    maxColor: '#000022',
+                    stops: [
+                        [0, '#effff8'],
+                        [0.5, '#9ef7c2'],
+                        [1, '#00ff22']
+                    ]
+                },
+
+                series: [{
+                    animation: {
+                        duration: 1000
+                    },
+                    data: data,
+                    joinBy: ['hc-key', 'code'],
+                    dataLabels: {
+                        enabled: true,
+                        color: '#FFFFFF',
+                        format: '{point.provinsi}'
+                    },
+                    name: 'Jumlah Sembuh',
+                    tooltip: {
+                        pointFormat: '{point.provinsi}: {point.value} Sembuh'
+                    }
+                }]
+            });
+            });
 
     $('#laravel_datatable').DataTable({
         processing: true,

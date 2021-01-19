@@ -38,6 +38,55 @@ class HomeController extends Controller
          return view('maps',$data);
      }
 
+     public function layerMap()
+     {
+        $datamaps = collect(Http::get('https://api.kawalcorona.com/indonesia/provinsi')->json());
+        $code = [
+            'id-jk',//jakarta
+            'id-jr',//jabar
+            'id-jt',//jawa tengah
+            'id-ji',//jatim
+            'id-se',//sulsel
+            'id-ki',//kaltim
+            'id-ri',//riau
+            'id-sb',//sumbar
+            'id-bt',//bantem
+            'id-ba',//bali
+            'id-su',//sumut
+            'id-yo',//jogja
+            'id-ks',//kalsel
+            'id-pa',//papua
+            'id-sl',//sumsel
+            'id-sw',//sulut
+            'id-kt',//kalteng
+            'id-ac',//jambi
+            'id-sg',//sultengggara
+            'id-1024',//lampung
+            'id-kr',//kep riau
+            'id-nb',//NTB
+            'id-ib',//iribar
+            'id-ma',//maluku
+            'id-ku',//kalut
+            'id-st',//sulteng
+            'id-be',//bengkulu
+            'id-go',//gorontalo
+            'id-ja',//jambi
+            'id-kb',//kalbar
+            'id-bb',//babel
+            'id-nt',//ntt
+            'id-la',//malut
+            'id-sr',//sulbar
+        ];
+        $i=0;
+        foreach($datamaps as $map){
+            $maps[$i]['provinsi']=$map['attributes']['Provinsi'];
+            $maps[$i]['value']=$map['attributes']['Kasus_Semb'];
+            $maps[$i]['code']=$code[$i];
+            $i++;
+        }
+        return response()->json($maps);
+     }
+
     public function index()
     {
         $data['suspect_indo'] = collect(Http::get('https://api.kawalcorona.com/indonesia')->json());
