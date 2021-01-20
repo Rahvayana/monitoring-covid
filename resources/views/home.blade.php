@@ -257,7 +257,7 @@
                         color: '#FFFFFF',
                         format: '{point.provinsi}'
                     },
-                    name: 'Jumlah Sembuh',
+                    name: 'Jumlah Positif',
                     tooltip: {
                         pointFormat: '{point.provinsi}: {point.value} Positif'
                     }
