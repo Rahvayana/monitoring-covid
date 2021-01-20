@@ -198,8 +198,8 @@
 <script src="/admin-lte/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script>
     $(document).ready( function () {
-        // Highcharts.getJSON('http://monitoring-covid-19.herokuapp.com/highmap', function (data) {
-        Highcharts.getJSON('http://127.0.0.1:8000/highmap', function (data) {
+        Highcharts.getJSON('http://monitoring-covid-19.herokuapp.com/highmap', function (data) {
+        // Highcharts.getJSON('http://127.0.0.1:8000/highmap', function (data) {
             // Make codes uppercase to match the map data
             // Instantiate the map
             Highcharts.mapChart('mapid', {
