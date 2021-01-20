@@ -222,7 +222,7 @@
 
             legend: {
                 title: {
-                    text: 'Individuals per km²',
+                    text: 'Peta Positif Tiap Provinsi',
                     style: {
                         color: ( // theme
                             Highcharts.defaultOptions &&
