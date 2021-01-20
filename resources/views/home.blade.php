@@ -210,7 +210,7 @@
                 },
 
                 title: {
-                    text: 'Kasus Sembuh Per Provinsi '
+                    text: 'Kasus Positif Per Provinsi '
                 },
 
                 legend: {
@@ -259,7 +259,7 @@
                     },
                     name: 'Jumlah Sembuh',
                     tooltip: {
-                        pointFormat: '{point.provinsi}: {point.value} Sembuh'
+                        pointFormat: '{point.provinsi}: {point.value} Positif'
                     }
                 }]
             });
