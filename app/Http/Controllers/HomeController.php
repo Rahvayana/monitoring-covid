@@ -80,7 +80,7 @@ class HomeController extends Controller
         $i=0;
         foreach($datamaps as $map){
             $maps[$i]['provinsi']=$map['attributes']['Provinsi'];
-            $maps[$i]['value']=$map['attributes']['Kasus_Semb'];
+            $maps[$i]['value']=$map['attributes']['Kasus_Posi'];
             $maps[$i]['code']=$code[$i];
             $i++;
         }

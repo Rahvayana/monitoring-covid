@@ -198,7 +198,8 @@
 <script src="/admin-lte/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script>
     $(document).ready( function () {
-        Highcharts.getJSON('http://monitoring-covid-19.herokuapp.com/highmap', function (data) {
+        // Highcharts.getJSON('http://monitoring-covid-19.herokuapp.com/highmap', function (data) {
+        Highcharts.getJSON('http://127.0.0.1:8000/highmap', function (data) {
             // Make codes uppercase to match the map data
             // Instantiate the map
             Highcharts.mapChart('mapid', {
@@ -228,12 +229,20 @@
                 colorAxis: {
                     min: 1,
                     type: 'logarithmic',
-                    minColor: '#EEEEFF',
+                    minColor: '#60f789',
                     maxColor: '#000022',
                     stops: [
-                        [0, '#effff8'],
-                        [0.5, '#9ef7c2'],
-                        [1, '#00ff22']
+                        [0, '#00BD55'],
+                        [0.1, '#00BD55'],
+                        [0.2, '#DED716'],
+                        [0.3, '#f0fc03'],
+                        [0.4, '#ffea00'],
+                        [0.5, '#ffff00'],
+                        [0.6, '#dbdb04'],
+                        [0.7, '#f55f5f'],
+                        [0.8, '#f73636'],
+                        [0.9, '#f71b1b'],
+                        [1, '#ff0000']
                     ]
                 },
 
