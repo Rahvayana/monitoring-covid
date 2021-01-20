@@ -209,42 +209,61 @@
                     borderWidth: 1
                 },
 
+                colors: ['#4ef542', 'rgba(19,64,117,0.2)', 'rgba(19,64,117,0.4)',
+                'rgba(19,64,117,0.5)', 'rgba(19,64,117,0.6)', 'rgba(19,64,117,0.8)', 'rgba(19,64,117,1)'],
+
+            title: {
+                text: 'Population density by country (/km²)'
+            },
+
+            mapNavigation: {
+                enabled: true
+            },
+
+            legend: {
                 title: {
-                    text: 'Kasus Positif Per Provinsi '
+                    text: 'Individuals per km²',
+                    style: {
+                        color: ( // theme
+                            Highcharts.defaultOptions &&
+                            Highcharts.defaultOptions.legend &&
+                            Highcharts.defaultOptions.legend.title &&
+                            Highcharts.defaultOptions.legend.title.style &&
+                            Highcharts.defaultOptions.legend.title.style.color
+                        ) || 'black'
+                    }
                 },
+                align: 'left',
+                verticalAlign: 'bottom',
+                floating: true,
+                layout: 'vertical',
+                valueDecimals: 0,
+                backgroundColor: ( // theme
+                    Highcharts.defaultOptions &&
+                    Highcharts.defaultOptions.legend &&
+                    Highcharts.defaultOptions.legend.backgroundColor
+                ) || 'rgba(255, 255, 255, 0.85)',
+                symbolRadius: 0,
+                symbolHeight: 14
+            },
 
-                legend: {
-                    layout: 'horizontal',
-                    borderWidth: 0,
-                    backgroundColor: 'rgba(255,255,255,0.85)',
-                    floating: true,
-                    verticalAlign: 'top',
-                    y: 25
-                },
-
-                mapNavigation: {
-                    enabled: true
-                },
-
-                colorAxis: {
-                    min: 1,
-                    type: 'logarithmic',
-                    minColor: '#60f789',
-                    maxColor: '#000022',
-                    stops: [
-                        [0, '#00BD55'],
-                        [0.1, '#00BD55'],
-                        [0.2, '#DED716'],
-                        [0.3, '#f0fc03'],
-                        [0.4, '#ffea00'],
-                        [0.5, '#ffff00'],
-                        [0.6, '#dbdb04'],
-                        [0.7, '#f55f5f'],
-                        [0.8, '#f73636'],
-                        [0.9, '#f71b1b'],
-                        [1, '#ff0000']
-                    ]
-                },
+            colorAxis: {
+                type: 'logarithmic',
+                minColor: '#7aff7d',
+                maxColor: '#000022',
+                stops: [
+                    [0, '#66ff73'],
+                    [0.1, '#40f54f'],
+                    [0.2, '#27f538'],
+                    [0.3, '#ffff63'],
+                    [0.4, '#f7f740'],
+                    [0.5, '#ffff00'],
+                    [0.6, '#ff6969'],
+                    [0.7, '#fc4747'],
+                    [0.8, '#fa2525'],
+                    [1, '#ff0000']
+                ]
+            },
 
                 series: [{
                     animation: {
